@@ -28,7 +28,7 @@ stages:
       tmsUpload: false
     steps:
       cloudFoundryDeploy:
-        cloudFoundryDeploy:
+        cloudFoundry:
           apiEndpoint: https://api.cf.us10-001.hana.ondemand.com
           org: 60431347trial
           space: dev
