@@ -8,32 +8,29 @@
 # This is a YAML-file. YAML is an indentation-sensitive file format. Please make sure to properly indent changes to it.
 ###
 
-
-
 ### General project setup
-general:
+---
+ general:
   pipeline: "sap-cloud-sdk" 
   buildTool: "mta"
-
-### Stage-specific configuration
-stages:
-    Build:
-      mavenExecuteStaticCodeChecks: false
-      npmExecuteLint: false
-    Additional Unit Tests:
-      npmExecuteScripts: false
-      karmaExecuteTests: false
-    Release:
-      cloudFoundryDeploy: true
-      tmsUpload: false
-    steps:
-      cloudFoundryDeploy:
-        cloudFoundry:
-          apiEndpoint: https://api.cf.us10-001.hana.ondemand.com
-          org: 60431347trial
-          space: dev
-          credentialsId: 'cfdeploy'
-          appName: ""
-        mtaDeployParameters: "-f --version-rule ALL"
-      artifactPrepareVersion:
-        versioningType: "cloud_noTag"
+ stages:
+  Build:
+    mavenExecuteStaticCodeChecks: false
+    npmExecuteLint: false
+  Additional Unit Tests:
+    npmExecuteScripts: false
+    karmaExecuteTests: false
+  Release:
+    cloudFoundryDeploy: true
+    tmsUpload: false
+  steps:
+    cloudFoundryDeploy:
+      cloudFoundry: 
+        apiEndpoint: "https://api.cf.us10-001.hana.ondemand.com"
+        org: "60431347trial"
+        space: "dev"
+        credentialsId: "cfdeploy"
+        appName: ""
+      mtaDeployParameters: "-f --version-rule ALL"
+    artifactPrepareVersion:
+      versioningType: "cloud_noTag"
