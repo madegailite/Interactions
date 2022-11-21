@@ -12,31 +12,28 @@
 
 ### General project setup
 general:
-  inferBuildTool: true
-
-### Step-specific configuration
-steps:
-  mavenExecute:
-    dockerImage: devxci/mbtci:1.0.14
-
-  artifactPrepareVersion:
-    versioningType: cloud_noTag
+  pipeline: "sap-cloud-sdk" 
+  buildTool: "mta"
 
 ### Stage-specific configuration
 stages:
-  'Confirm':
-    manualConfirmation: false
-
-#  Integration:
-#    credentials:
-#      - alias: 'mySystemAlias'
-#        credentialId: 'mySystemCredentialsId'
-
-#  Release:
-#    cfTargets:
-#      - org: 'myOrg'
-#        space: 'mySpace'
-#        apiEndpoint: 'https://'
-#        appName: 'myAppName'
-#        manifest: 'manifest.yml'
-#        credentialsId: 'myDeploymentCredentialsId'
+    Build:
+      mavenExecuteStaticCodeChecks: false
+      npmExecuteLint: false
+    Additional Unit Tests:
+      npmExecuteScripts: false
+      karmaExecuteTests: false
+    Release:
+      cloudFoundryDeploy: true
+      tmsUpload: false
+    steps:
+      cloudFoundryDeploy:
+        cloudFoundryDeploy:
+          apiEndpoint: https://api.cf.us10-001.hana.ondemand.com
+          org: 60431347trial
+          space: dev
+          credentialsId: 'cfdeploy'
+          appName: ""
+        mtaDeployParameters: "-f --version-rule ALL"
+      artifactPrepareVersion:
+        versioningType: "cloud_noTag"

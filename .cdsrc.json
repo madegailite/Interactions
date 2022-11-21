@@ -1,1 +1,21 @@
-{}
+{
+    "[development]": {
+        "auth": {
+            "passport": {
+                "strategy": "mock",
+                "users": {
+                    "admin@tester.sap.com": {
+                        "password": "initial",
+                        "ID": "admin",
+                        "userAttributes": {
+                            "email": "admin@tester.sap.com"
+                        },
+                        "roles": [
+                            "InteractionsAdmin"
+                        ]
+                    }
+                }
+            }
+        }
+    }
+}
