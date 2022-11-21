@@ -8,10 +8,10 @@
 # This is a YAML-file. YAML is an indentation-sensitive file format. Please make sure to properly indent changes to it.
 ###
 ---
- general:
-  pipeline: "sap-cloud-sdk" 
+general:
+  pipeline: "sap-cloud-sdk"
   buildTool: "mta"
- stages:
+stages:
   Build:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: false
@@ -20,15 +20,13 @@
     karmaExecuteTests: false
   Release:
     cloudFoundryDeploy: true
+    cfApiEndpoint: "https://api.cf.us10-001.hana.ondemand.com"
+    cfOrg: "60431347trial"
+    cfSpace: "dev"
+    cfCredentialsId: "cfdeploy"
     tmsUpload: false
-  steps:
-    cloudFoundryDeploy:
-      cloudFoundry: 
-        apiEndpoint: 'https://api.cf.us10-001.hana.ondemand.com'
-        org: '60431347trial'
-        space: 'dev'
-        credentialsId: 'cfdeploy'
-        appName: ''
-      mtaDeployParameters: '-f --version-rule ALL'
-    artifactPrepareVersion:
-      versioningType: 'cloud_noTag'
+steps:
+  artifactPrepareVersion:
+    versioningType: "cloud_noTag"
+  cloudFoundryDeploy:
+    mtaDeployParameters: "-f --version-rule ALL"
